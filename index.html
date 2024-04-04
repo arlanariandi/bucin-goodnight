@@ -4,21 +4,193 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Good Night</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <style>
+        #page1 {
+            display: block;
+        }
+
+        #page2 {
+            display: none;
+        }
+
+        #page3 {
+            display: none;
+        }
+
+        #page4 {
+            display: none;
+        }
+
+        .hide-scroll-bar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .hide-scroll-bar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
 </head>
 <body class="h-screen bg-pink-200">
+<audio controls autoplay loop hidden>
+    <source src="assets/song.mp3" type="audio/mpeg">
+</audio>
 
-<div class="flex min-h-screen flex-col justify-center items-center px-6 py-12 lg:px-8">
-    <div class="relative mx-auto w-full max-w-sm flex flex-col">
-        <a href="page1.html" id="">
-            <img class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-20 w-auto"
-                 src="assets/heart.gif" alt="Heart">
-            <div class="mx-auto h-36 w-36 mb-3 rounded-full bg-white shadow-md"></div>
-        </a>
+<div id="page1">
+    <div class="flex min-h-screen flex-col justify-center items-center px-6 py-12 lg:px-8">
+        <img class="mb-10" src="assets/eli.gif" alt="eli">
+        <div class="relative mx-auto w-full max-w-sm flex flex-col">
+            <button id="btn-love">
+                <img class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-20 w-auto"
+                     src="assets/heart.gif" alt="Heart">
+                <div class="mx-auto h-36 w-36 mb-3 rounded-full bg-white shadow-md"></div>
+            </button>
+        </div>
+        <p class="text-center mt-5 text-lg font-medium">Touch his LOVE!</p>
     </div>
-    <p class="text-center mt-5 text-lg font-medium">Touch his LOVE!</p>
+
+    <div id="myModal" class="modal hidden fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center">
+        <div class="bg-white p-8 rounded-lg shadow flex flex-col items-center">
+            <label for="userInput" class="font-medium">Enter your name</label>
+            <input type="text" id="userInput" class="border p-2 mt-2 mb-3 w-full rounded-lg text-center"
+                   placeholder="buna">
+            <button id="confirmBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-lg">Ok
+            </button>
+        </div>
+    </div>
 </div>
 
+<div id="page2">
+    <div class="flex min-h-screen flex-col justify-center items-center px-6 py-12 lg:px-8">
+        <div class="flex flex-col m-auto p-auto">
+            <div class="flex overflow-x-scroll hide-scroll-bar" id="scrollContainer">
+                <div class="flex flex-nowrap" id="contentContainer"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="page3">
+    <div class="flex min-h-screen flex-col justify-center items-center px-6 py-12 lg:px-8">
+        <img class="mb-10" src="assets/bubududu-drum.gif" alt="bubududu-drum">
+        <p id="title" class="text-center mb-5 text-lg font-medium">Coba Klik 3 Love Ini! 😆❤️</p>
+        <div class="relative mx-auto w-full max-w-sm flex flex-row justify-center">
+            <button id="love1" class="love-button">
+                <img class="h-14 w-auto" src="assets/heart.png" alt="Heart">
+            </button>
+            <button id="love2" class="love-button">
+                <img class="h-14 w-auto" src="assets/heart.png" alt="Heart">
+            </button>
+            <button id="love3" class="love-button">
+                <img class="h-14 w-auto" src="assets/heart.png" alt="Heart">
+            </button>
+        </div>
+    </div>
+</div>
+
+<div id="page4">
+    <div class="flex min-h-screen flex-col justify-center items-center px-6 py-12 lg:px-8">
+        <div class="relative mx-auto w-full max-w-sm flex flex-col">
+            <img class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-28 w-auto"
+                 src="assets/panda-bear.gif" alt="Heart">
+            <div class="mx-auto h-40 w-40 mb-3 mt-5 rounded-full bg-white bg-opacity-50 shadow-md"></div>
+        </div>
+        <p class="text-center mt-5 text-lg font-medium mb-3">Terakhir Nih 😆❤️</p>
+        <p id="text1" class="text-center text-md font-medium text-gray-800 capitalize mb-2"></p>
+        <p id="text2" class="text-center text-md font-medium text-gray-800 capitalize mb-2"></p>
+        <p id="text3" class="text-center text-3xl hidden">❤️❤️❤️❤️❤️❤️❤️❤️❤️</p>
+    </div>
+</div>
+
+<footer
+        class="bg-zinc-50 text-center text-surface/75 dark:bg-neutral-700 dark:text-white/75 lg:text-left">
+
+    <div class="text-gray-500 p-6 text-center">
+        <span>© 2024 Copyright:</span>
+        <a class="font-medium" href="https://github.com/arlanariandi">arlanariandi</a>
+    </div>
+</footer>
 <script src="app.js"></script>
+<script>
+    const content = [
+        {
+            text: "Hai, ",
+            img: "assets/flower.gif",
+            emoji: " 😍"
+        },
+        {
+            text: "aku cuma mau bilang ",
+            img: "assets/smile.gif",
+            emoji: " 😋❤️"
+        },
+        {
+            text: "good night ya ",
+            img: "assets/bubududu.gif",
+            emoji: " 😁❤️"
+        },
+        {
+            text: "semangat jalani harinya ",
+            img: "assets/love-couple.gif",
+            emoji: " 😍❤️"
+        },
+        {
+            text: "selalu jaga kesehatan ya ",
+            img: "assets/bubududu-nosick.gif",
+            emoji: " 😊❤️"
+        },
+        {
+            text: "jangan sampai sakit ",
+            img: "assets/bubududu-sick.gif",
+            emoji: " 😖❤️"
+        }
+    ];
+
+    const page3 = document.querySelector('#page3');
+    const contentContainer = document.getElementById('contentContainer');
+
+    content.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.className = `content-item inline-block px-4 ${index > 0 ? 'hidden' : ''}`;
+        div.innerHTML = `
+                        <div class="h-52 w-96 max-w-xs overflow-hidden bg-white bg-opacity-20 rounded-3xl border-white shadow-md border-2 hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                          <div class="flex flex-col justify-center items-center h-full">
+                            <img class="w-28 mb-2" src="${item.img}" alt="icon">
+                            <p class="font-medium text-lg text-gray-800 capitalize">
+                                ${item.text}
+                                ${index === 0 ? `<span id="userInput">${item.name ? item.name : ''}</span>` : ''}
+                                ${item.emoji}
+                             </p>
+                          </div>
+                        </div>
+                        <p class="text-gray-500 text-sm mt-8 text-center">klik gambar untuk geser</p>
+                      `;
+        contentContainer.appendChild(div);
+    });
+
+    let currentIndex = 0;
+    const contentElements = document.querySelectorAll('.content-item');
+
+    function showNextContent() {
+        if (currentIndex < contentElements.length - 1) {
+            contentElements[currentIndex].classList.add('hidden');
+            currentIndex++;
+            contentElements[currentIndex].classList.remove('hidden');
+        } else {
+            page2.style.display = 'none';
+            page3.style.display = 'block';
+        }
+    }
+
+    contentContainer.addEventListener('click', showNextContent);
+
+    window.addEventListener('beforeunload', function (e) {
+        if (!isLastContent) {
+            e.preventDefault();
+            e.returnValue = '';
+        }
+    });
+</script>
 </body>
 </html>
